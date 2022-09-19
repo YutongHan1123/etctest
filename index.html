@@ -14,6 +14,7 @@
   <meta content="black" name="apple-mobile-web-app-status-bar-style" />
 
   <link rel="stylesheet" href="assets/css/index.css">
+  <link rel="stylesheet" href="assets/css/animation.css">
 
 	<script src="assets/js/jquery-1.7.2.min.js" language="javascript"></script>
   <script src="assets/js/d3.v4.min.js"></script>
@@ -22,16 +23,24 @@
 </head>
 
 <body>
-  <h2>中国各地ETC用户数如何增长？</h2>
+  <div class="car_parent">
+    <div class="car">
+      <div class="car_item"></div>
+    </div>
+  </div>
+  <h2>中国各地ETC用户数增长几何</h2>
+  <p>ETC不停车收费系统是高速公路或桥梁自动收费。通过安装在车辆挡风玻璃上的车载电子标签与在收费站ETC车道上的微波天线之间进行的专 用短程通讯，利用计算机联网技术与银行进行后台结算处理，从而达到车辆通过高速公路或桥梁收费站无需停车而能交纳高速公路或桥梁费用的目的。</p>
   <p id="perYear">中国ETC系统从上世纪90年代引入，但整体普及进度缓慢。1998年，交通部组织交通公路科学研究所等单位进行不停车收费系统的研究，并开展示范工程建设，国内ETC系统正式启动。然而，由于全国标准缺位、 应用场景单一、经济性不强等因素，中国ETC的普及率仍然偏低。</p>
   <div id="map"></div>
   <div class="tooltip"></div>
   <div class="credit">
+    <p>制图：韩雨彤</p>
     <p>注：海南、西藏高速公路不设收费站，因此无法办理全国通用的高速公路ETC</p>
     <p>数据来源：据各地交通运输厅、各地运输/交通公众号、中商产业研究院《2020年中国ETC盈利模式创新行业市场前景及投资研究报告》等公开资料整理。部分年份缺乏数据的情况下，根据国家统计局中，当年该地的民用汽车拥有量与日期相近的ETC用户占比计算而得</p>
-    <p>制图：韩雨彤</p>
   </div>
-
+  <div class="back">
+    <img class="img" src="assets/img/back-01.png" alt="">
+  </div>
 </body>
 <script src="assets/data/data.js" language="javascript"></script>
 <script src="assets/js/map.js"></script>

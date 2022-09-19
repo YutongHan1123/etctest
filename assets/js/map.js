@@ -11,12 +11,19 @@ var w = window,
     d = document,
     e = d.documentElement,
     g = d.getElementsByTagName('body')[0],
-    width = w.innerWidth > 1200 ? 1200 : w.innerWidth || +e.clientWidth || g.clientWidth,
-    height = +w.innerHeight|| e.clientHeight|| g.clientHeight;
+    width = w.innerWidth > 1200 ? 1200 : w.innerWidth || +e.clientWidth || g.clientWidth;
+
+if (w.innerWidth > 1200) {
+    height = width;
+} else if (w.innerWidth < 1200 && w.innerWidth > 500) {
+    height = width*0.9;
+} else {
+    height = width*1.5;
+}
 
 initData();
 function initData(){
-  d3.json("100000_full.json", function(error, data) {
+  d3.json("assets/data/100000_full.json", function(error, data) {
       if (error) throw error;
       var svg = d3.select("#map").append("svg")
         .attr("width", width)
@@ -44,9 +51,7 @@ function createMap(svg, data) {
         .attr('d', path)
 
 countries.on("mouseover", stateShow)
-  .on("mouseout", function(d, i) {
-      hideState()
-  });
+  .on("mouseout", hideState);
 
 function getProvinceCoors(name){
     for(var i=0; i<data.features.length; i++){
@@ -95,6 +100,8 @@ svg.selectAll("text")
   .attr("dy",5)
   .attr("dx",0)
   .attr("font-weight",400)
+  .on("mouseover", stateShow)
+  .on("mouseout", hideState);
 
 //省的etc-圆圈
 var changeBubble = svg.selectAll("circle")
@@ -102,11 +109,11 @@ var changeBubble = svg.selectAll("circle")
       .enter()
       .append("circle")
       .attr("stroke",function(){
-        return "#d4644e"
+        return "#00c380"
       })
       .attr("stroke-width",2)
       .attr("fill",function(){
-        return "rgba(227,154,140,0.4)"
+        return "rgba(0,195,128,0.4)"
       })
       .attr("r",function(d){
         return ratioR(w.innerWidth > 500 ? Math.sqrt(d[2])/50 : Math.sqrt(d[2])/80)
@@ -124,36 +131,36 @@ var changeBubble = svg.selectAll("circle")
 
 //图例
 var legend = svg.append("g")
-    .attr("transform","translate("+(width-480)/2+","+(height-200)+")");
+    .attr("transform","translate("+(width-330)/2+","+(40)+")");
 
 legend.append("text")
       .attr("fill", "#333")
       .text("ETC用户数")
-      .attr("x",w.innerWidth > 500 ? 90 : 110)
-      .attr("y",90)
+      .attr("x", width > 500 ? 100 : 110)
+      .attr("y", 90)
       .attr("font-size",12)
       .attr("dy",5)
       .attr("font-weight",900)
 
 legend.append("circle")
-      .attr("stroke", "#d4644e")
+      .attr("stroke", "#00C380")
       .attr("stroke-width",2)
-      .attr("fill", "rgba(227,154,140,0.4)")
-      .attr("r", ratioR(w.innerWidth > 500 ? Math.sqrt(1000)/40 : Math.sqrt(1000)/80))
-      .attr("cx",200)
-      .attr("cy",90)
+      .attr("fill", "rgba(0,195,128,0.4)")
+      .attr("r", ratioR(w.innerWidth > 500 ? Math.sqrt(500)/40 : Math.sqrt(500)/80))
+      .attr("cx", 200)
+      .attr("cy", 90)
 
 legend.append("text")
       .attr("fill", "#333")
       .text("500万")
-      .attr("x",200)
-      .attr("y",90)
+      .attr("x", 200)
+      .attr("y", 90)
       .attr("font-size",12)
       .attr("dy",5)
       .attr("text-anchor", "middle")
 
 svg.append("g").append("image")
-    .attr("xlink:href", "hand.png")
+    .attr("xlink:href", "assets/img/hand.png")
     .attr("width", 30)
     .attr("height", 30)
     .attr("x", (width-180)/2)
@@ -190,13 +197,20 @@ svg.append("g").append("text")
 function showStatePopup(d){
   var currentYear = year_i < 1 ? 0 : etc[year_i - 1][0];
   console.log(currentYear)
-  var tooltip = d3.select(".tooltip")
-        .html("<p class='province'>" + d[0] + " <span class='year'> " + currentYear + "年</span></p> <p class='intro'>" + d[year_i] + "万ETC用户</p>");
+  var tooltip = d3.select(".tooltip");
 
-  var mouse = getMousePos()
-  var x = mouse.x
-  if(x > width-5) x = width-5
-  var y = mouse.y
+  if (d[year_i] > 0.01) {
+    tooltip.html("<p class='province'>" + d[0] + " <span class='year'> " + currentYear + "年</span></p> <p class='intro'>ETC用户达" + d[year_i] + "万</p>")
+  } else if (d[year_i] > 0 && d[year_i] <= 0.01) {
+    tooltip.html("<p class='province'>" + d[0] + " <span class='year'> " + currentYear + "年</span></p> <p class='intro'>ETC正式开通</p>")
+  } else if (d[year_i] == 0) {
+    tooltip.html("<p class='province'>" + d[0] + " <span class='year'> " + currentYear + "年</span></p> <p class='intro'>ETC尚在试点</p>")
+  }
+
+  var mouse = getMousePos();
+  var x = mouse.x;
+  if(x > width-100) x = width-100;
+  var y = mouse.y;
   $(".tooltip").css("left", x).css("top",y+10).show();
 }
 

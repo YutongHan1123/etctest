@@ -10,23 +10,36 @@ body {
     max-width: 1200px;
     display: block;
     margin: 0 auto;
+    background-color: #EFF0ED;
 }
 
 h2 {
-  text-align: center;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-#perYear {
+p {
     max-width: 640px;
     display: block;
     margin: .5rem auto;
-    height: 10rem;
 }
 
-@media screen and (min-width: 641px) {
-    #perYear {
-        height: 6rem;
+.back {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    bottom: 440px;
+    z-index: -2;
+
+    IMG {
+        position: absolute;
+        width: 640px;
+        left: calc(50vw - 320px);
     }
+}
+
+#perYear {
+    height: 6rem;
 }
  
 .country {
@@ -80,10 +93,38 @@ h2 {
 .credit {
     max-width:640px;
     font-size: 14px;
-    color: #676767;
-    margin: 20px auto 50px;
+    color: white;
+    margin: 20px auto;
 
     p {
         margin: .5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .back IMG {
+        left: 0;
+    }
+    
+    #perYear {
+        height: 10rem;
+    }
+}
+
+@media (min-width: 1201px) {
+    .back IMG {
+        left: 280px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .credit {
+        margin-top: 200px;
+    }
+}
+
+@media (max-width: 500px) {
+    .credit {
+        margin-top: 50px;
     }
 }
