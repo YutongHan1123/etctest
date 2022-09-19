@@ -16,10 +16,10 @@
 ## 动画
 通过setInterval，定时改变地图上的圆圈大小、年份和文字描述
 
-开篇的小动画源自Zayan Mohammed在CodePen上的开源小动画[Car Animation using html/css/js](https://codepen.io/az-b/pen/WNEabzO)
+开篇小动画改自Zayan Mohammed在CodePen上的开源小动画[Car Animation using html/css/js](https://codepen.io/az-b/pen/WNEabzO)
 
 ## 背景图
-背景图改自Freepik上的免费svg[city vector](https://www.freepik.com/free-vector/silhouette-skyline-illustration_3786396.htm#query=city&position=22&from_view=search)
+背景图改自Freepik上的免费svg：[city vector](https://www.freepik.com/free-vector/silhouette-skyline-illustration_3786396.htm#query=city&position=22&from_view=search)
 
 ## 文字
 主要引用自政府门户网站、前瞻产业研究院[《2022年中国ETC行业全景图谱》](https://www.qianzhan.com/analyst/detail/220/220225-4791e451.html)和[《2022年中国及31省市ETC行业政策汇总及解读》](https://www.qianzhan.com/analyst/detail/220/220304-4a10f690.html)等公开资料
