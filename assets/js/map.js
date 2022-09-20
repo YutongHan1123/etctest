@@ -163,15 +163,16 @@ svg.append("g").append("image")
     .attr("xlink:href", "assets/img/hand.png")
     .attr("width", 30)
     .attr("height", 30)
-    .attr("x", (width-180)/2)
-    .attr("y",70);
+    .attr("x", (width-210)/2)
+    .attr("y",65);
 
-svg.append("g").append("text")
-    .text("点击地图了解各地详情")
-    .attr("x",(width-180)/2 + 25)
-    .attr("y",75)
-    .attr("dy",12)
-    .style("font-size",10)
+var cl_ho = svg.append("g").append("text");
+// 当前设备是移动设备
+cl_ho.text(/Mobi|Android|iPhone/i.test(navigator.userAgent) ? "点击地图了解各地详情" : "鼠标悬停地图了解各地详情")
+
+cl_ho.attr("x",(width-160)/2)
+    .attr("y",85)
+    .attr("font-size",14);
 
     function stateShow(d) {
       for ( var i = 0; i < provinceData.length; i++) {
