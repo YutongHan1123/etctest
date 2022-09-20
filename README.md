@@ -24,3 +24,14 @@
 ## 文字
 主要引用自政府门户网站、前瞻产业研究院[《2022年中国ETC行业全景图谱》](https://www.qianzhan.com/analyst/detail/220/220225-4791e451.html)和[《2022年中国及31省市ETC行业政策汇总及解读》](https://www.qianzhan.com/analyst/detail/220/220304-4a10f690.html)等公开资料
 > 如[14个省份实现高速公路ETC联网](http://www.gov.cn/xinwen/2014-12/26/content_2797522.htm)
+
+## 改进
+发给小伙伴后，被告知“点击地图没有东西出现诶”。这是因为点击是手机端操作，出现tooltip，电脑端需要hover才会出现。因此我想能不能识别用户使用的时候是电脑端还是移动端，不同设备对应的文字不同。比较幸运找到了[JavaScript 侦测手机浏览器的五种方法](https://www.ruanyifeng.com/blog/2021/09/detecting-mobile-browser.html)这篇文章，套用了下面的代码解决：
+```
+if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+  // 当前设备是移动设备
+}
+```
+
+## 问题
+改文字的时候发现chrome浏览器可以识别D3中element.style("font-size", 10)，但是firefox不能识别，只能识别element.attr("font-size", 20)，不知道为什么，有待查询。
